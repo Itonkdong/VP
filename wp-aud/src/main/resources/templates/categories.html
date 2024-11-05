@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Categories</title>
+</head>
+<body>
+<h1>Categories</h1>
+
+<p>Here are all the categories</p>
+
+<p th:if="${categories.size() == 0}">
+    There are no available categories
+</p>
+
+<div th:else="${categories.size() != 0}">
+   <ul>
+    <li th:each="category : ${categories}">
+        <span th:text="${category.getName()}"></span>
+        <span>,</span>
+        <span th:text="${category.getDescription()}"></span>
+    </li>
+</ul>
+</div>
+
+<footer>
+    Page Visits: <span th:text="${visits}"></span>
+    <div th:if="${error != null}">
+        <span th:text="${error}"></span>
+    </div>
+</footer>
+
+
+</body>
+</html>

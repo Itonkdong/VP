@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artist Details</title>
+</head>
+<body>
+<h1 th:text="${foundArtist.getFirstName()} + ' ' + ${foundArtist.getLastName()}"></h1><span>Songs: </span>
+
+<div th:if="${artisSongs.size() == 0}" th:text="Artis has 0 songs"></div>
+
+<ul>
+    <li th:each="song : ${artisSongs}"
+        th:text="'Title: ' + ${song.getTitle()} + ', Genre: ' + ${song.getGenre()}  + ', Release Year: ' + ${song.getReleaseYear()}">
+
+    </li>
+</ul>
+</body>
+</html>

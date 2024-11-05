@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artists</title>
+</head>
+<body>
+<h1>Artists:</h1>
+
+<form action="/allArtists" method="post">
+        <div th:each="artist : ${allArtists}">
+            <input type="radio"
+                   name="artistId"
+                   th:value="${artist.getId()}"
+                   th:text="${artist.getFirstName()} + ' ' + ${artist.getLastName()}"
+            >
+        </div>
+        <input type='submit' value='Show his songs'>
+
+    </form>
+<div></div>
+</body>
+</html>
