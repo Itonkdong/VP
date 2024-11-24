@@ -1,3 +1,4 @@
+/*
 package mk.ukim.finki.mk.lab.web.servlet;
 
 import jakarta.servlet.ServletContext;
@@ -62,3 +63,4 @@ public class SongListServlet extends HttpServlet
         resp.sendRedirect("/artist");
     }
 }
+*/

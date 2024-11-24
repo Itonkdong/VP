@@ -19,19 +19,27 @@
     <!-- Display radio buttons for each song,
             the value should be the trackId
             and the displayed text should be Title: <songTitle>, Genre:<genre>, Release Year: <releaseYear> -->
-    <form action="/listSongs" method="post">
-        <div th:each="song : ${songs}">
+    <form action="/artists" method="get">
+        <div th:each="song : ${allSongs}">
             <input type="radio"
                    name="trackId"
 
                    th:value="${song.getTrackId()}"
-                   th:text="'Title: ' + ${song.getTitle()} + ', Genre: ' + ${song.getGenre()}  + ', Release Year: ' + ${song.getReleaseYear()}"
+                   th:text="'Title: ' + ${song.getTitle()} + ', Genre: ' + ${song.getGenre()}  + ', Release Year: ' + ${song.getReleaseYear()} + ', Album: ' + ${song.getAlbum().getName()}"
             >
+            <a th:href="@{'/songs/edit-form/{id}' (id=${song.getId()})}">Edit</a>
+            <a th:href="@{'/songs/delete/{songId}' (songId=${song.getId()})}">Delete</a>
 
         </div>
         <input type='submit' value='Submit'>
 
     </form>
+    <a href="/songs/add-form">Add new Song</a>
+
+    <div th:if="${error != null}" th:text="'Error Orrcured: ' + ${error}">
+
+    </div>
+
 </main>
 </body>
 </html>

@@ -1,3 +1,4 @@
+/*
 package mk.ukim.finki.mk.lab.web.servlet;
 
 import jakarta.servlet.ServletException;
@@ -56,3 +57,4 @@ public class AllArtists extends HttpServlet
         resp.sendRedirect(String.format("/artistDetails?artistId=%s", artistId));
     }
 }
+*/

@@ -1,6 +1,7 @@
 package mk.ukim.finki.mk.lab.bootstrap;
 
 import jakarta.annotation.PostConstruct;
+import mk.ukim.finki.mk.lab.model.Album;
 import mk.ukim.finki.mk.lab.model.Artist;
 import mk.ukim.finki.mk.lab.model.Song;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,8 @@ public class DataHolder
 
     public static List<Song> songs;
     public static long nextSongId = 0;
+
+    public static List<Album> albums;
 
 
     @PostConstruct
@@ -46,11 +49,20 @@ public class DataHolder
         ArrayList<Artist> songArtis4 = new ArrayList<>();
         songArtis4.add(artists.get(4)); // David Bowie
 
-        songs.add(new Song(String.valueOf(nextSongId++), "It's My Life", "Rock", 2000, songArtis));
-        songs.add(new Song(String.valueOf(nextSongId++), "Bohemian Rhapsody", "Rock", 1975, songArtis1));
-        songs.add(new Song(String.valueOf(nextSongId++), "Jailhouse Rock", "Rock 'n' Roll", 1957, songArtis2));
-        songs.add(new Song(String.valueOf(nextSongId++), "Respect", "Soul", 1967, songArtis3));
-        songs.add(new Song(String.valueOf(nextSongId++), "Heroes", "Rock", 1977, songArtis4));
+
+        albums = new ArrayList<>();
+        albums.add(new Album("Crush", "Rock", "2000")); // For "It's My Life" by Bon Jovi
+        albums.add(new Album("A Night at the Opera", "Rock", "1975")); // For "Bohemian Rhapsody" by Queen
+        albums.add(new Album("Jailhouse Rock", "Rock 'n' Roll", "1957")); // For "Jailhouse Rock" by Elvis Presley
+        albums.add(new Album("I Never Loved a Man the Way I Love You", "Soul", "1967")); // For "Respect" by Aretha Franklin
+        albums.add(new Album( "Heroes", "Rock", "1977")); // For "Heroes" by David Bowie
+
+
+        songs.add(new Song(String.valueOf(nextSongId++), "It's My Life", "Rock", 2000, songArtis, albums.get(0)));
+        songs.add(new Song(String.valueOf(nextSongId++), "Bohemian Rhapsody", "Rock", 1975, songArtis1, albums.get(1)));
+        songs.add(new Song(String.valueOf(nextSongId++), "Jailhouse Rock", "Rock 'n' Roll", 1957, songArtis2, albums.get(2)));
+        songs.add(new Song(String.valueOf(nextSongId++), "Respect", "Soul", 1967, songArtis3, albums.get(3)));
+        songs.add(new Song(String.valueOf(nextSongId++), "Heroes", "Rock", 1977, songArtis4, albums.get(4)));
 
     }
 }

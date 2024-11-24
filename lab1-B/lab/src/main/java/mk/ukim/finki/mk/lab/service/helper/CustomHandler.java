@@ -3,6 +3,8 @@ package mk.ukim.finki.mk.lab.service.helper;
 import jakarta.servlet.http.HttpServletRequest;
 import org.thymeleaf.context.WebContext;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -37,5 +39,23 @@ public class CustomHandler
     public static boolean isNullOrEmpty(String s)
     {
         return s == null || s.isEmpty();
+    }
+
+    public static long getRandomId()
+    {
+        return (long) (Math.random() * 1000);
+    }
+
+    public static String sendRedirect(String path, String error)
+    {
+        if (!CustomHandler.isNullOrEmpty(error))
+        {
+            String errorMessage = URLEncoder.encode(error, StandardCharsets.UTF_8);
+            return String.format("redirect:%s?error=%s",path, error);
+        }
+        else
+        {
+            return String.format("redirect:%s",path);
+        }
     }
 }

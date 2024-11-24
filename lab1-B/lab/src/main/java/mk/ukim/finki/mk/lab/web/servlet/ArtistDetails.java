@@ -1,3 +1,4 @@
+/*
 package mk.ukim.finki.mk.lab.web.servlet;
 
 import jakarta.servlet.ServletException;
@@ -69,3 +70,4 @@ public class ArtistDetails extends HttpServlet
 
     }
 }
+*/

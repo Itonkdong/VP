@@ -1,3 +1,4 @@
+/*
 package mk.ukim.finki.mk.lab.web.servlet;
 
 import jakarta.servlet.ServletException;
@@ -52,7 +53,8 @@ public class SongDetailsServlet extends HttpServlet
         WebContext context = WebContextBuilder.getContext(req, resp, this.getServletContext());
         context.setVariable("song", song.get());
 
-        engine.process("songDetails.html", context, resp.getWriter());
+        engine.process("details-song.html", context, resp.getWriter());
 
     }
 }
+*/

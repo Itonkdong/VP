@@ -1,3 +1,4 @@
+/*
 package mk.ukim.finki.mk.lab.web.servlet;
 
 import jakarta.servlet.ServletContext;
@@ -66,7 +67,7 @@ public class ArtistServlet extends HttpServlet
         context.setVariable("artists", artists);
         context.setVariable("trackId", trackId);
 
-        engine.process("artistsList.html", context, resp.getWriter());
+        engine.process("listArtists.html", context, resp.getWriter());
     }
 
     @Override
@@ -106,3 +107,4 @@ public class ArtistServlet extends HttpServlet
         resp.sendRedirect(String.format("/songDetails?trackId=%s", trackId));
     }
 }
+*/
