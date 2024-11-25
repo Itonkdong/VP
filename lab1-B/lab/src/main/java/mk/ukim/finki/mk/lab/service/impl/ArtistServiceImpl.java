@@ -5,12 +5,14 @@ import mk.ukim.finki.mk.lab.model.Song;
 import mk.ukim.finki.mk.lab.repository.InMemoryArtistRepository;
 import mk.ukim.finki.mk.lab.service.ArtistService;
 import mk.ukim.finki.mk.lab.service.SongService;
+import mk.ukim.finki.mk.lab.service.helper.CustomHandler;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.MissingResourceException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ArtistServiceImpl implements ArtistService
@@ -68,5 +70,15 @@ public class ArtistServiceImpl implements ArtistService
         }
 
         return artistsSongs;
+    }
+
+    @Override
+    public List<Artist> findArtistsByName(String artistName) {
+        if (CustomHandler.isNullOrEmpty(artistName))
+        {
+            return this.listAll();
+        }
+
+        return this.listAll().stream().filter(artist -> artist.getFirstName().contains(artistName)).collect(Collectors.toList());
     }
 }

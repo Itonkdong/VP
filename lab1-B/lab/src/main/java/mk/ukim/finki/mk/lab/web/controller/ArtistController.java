@@ -22,14 +22,15 @@ public class ArtistController
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/artists")
-    private String getArtistPage(@RequestParam(required = false) String trackId, Model model)
+    private String getArtistPage(@RequestParam(required = false) String trackId, @RequestParam(required = false) String artistName ,Model model)
     {
         if (CustomHandler.isNullOrEmpty(trackId))
         {
             return CustomHandler.sendRedirect("/songs", "You must select song with a valid track Id.");
         }
 
-        List<Artist> artists = this.artistService.listAll();
+//        List<Artist> artists = this.artistService.listAll();
+        List<Artist> artists = this.artistService.findArtistsByName(artistName);
 
         model.addAttribute("artists", artists);
         model.addAttribute("trackId", trackId);

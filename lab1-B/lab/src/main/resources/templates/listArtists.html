@@ -49,6 +49,19 @@
         <input type='submit' value='Add artist'>
 
     </form>
+
+    <form action="/artists" method="get">
+        <div>
+            <input type="hidden" name="trackId" th:value="${trackId}">
+
+        </div>
+        <div>
+            <label for="artistName">Filter Artists</label>
+            <input name="artistName" id="artistName">
+            <button>Filter</button>
+        </div>
+
+    </form>
     <!-- Make changes to this code to dynamically display radio buttons for each artist as in the example -->
 
     <a href="/songs">All Songs</a>

@@ -11,4 +11,6 @@ public interface ArtistService
     List<Artist> listAll();
     Optional<Artist> findById(long id);
     List<Song> findArtistSongs(long artistId);
+
+    List<Artist> findArtistsByName(String artistName);
 }
