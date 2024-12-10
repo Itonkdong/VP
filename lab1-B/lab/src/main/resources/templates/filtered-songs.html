@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Filtered Song Details</title>
+
+</head>
+<body>
+<header>
+    <h1>Filtered Songs:</h1>
+    <h2 th:if="${selectedAlbum != null}" th:text="'For Album:'"></h2>
+    <div th:if="${selectedAlbum != null}" th:text="${selectedAlbum.getName()}"></div>
+</header>
+<section>
+    <h2>Song:</h2>
+    <div th:if="${filteredSongs.size() == 0}">No such songs</div>
+    <ul th:if="${filteredSongs.size() != 0}">
+        <li th:each="song : ${filteredSongs}"
+            th:text="${song.getTitle()} + ' ' + ${song.getReleaseYear()}"></li>
+    </ul>
+</section>
+
+<a href="/albums">All Albums</a>
+
+</body>
+</html>

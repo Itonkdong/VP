@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Albums</title>
+</head>
+<body>
+<h1>Albums</h1>
+<form action="/filteredSongs" method="get">
+    <div th:each="album : ${allAlbums}">
+    <input type="radio"
+           name="albumId"
+           th:value="${album.getId()}"
+           th:text="'Name: ' + ${album.getName()} + ', Genre: ' + ${album.getGenre()}  + ', Release Year: ' + ${album.getReleaseYear()}"
+    >
+</div>
+    <div>
+        <label for="release-year">
+           After Release Year:
+        </label>
+        <input name="releaseYear" type="number" id="release-year">
+    </div>
+    <button>Filter Songs</button>
+</form>
+</body>
+</html>
