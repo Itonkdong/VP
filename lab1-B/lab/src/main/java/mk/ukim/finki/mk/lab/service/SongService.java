@@ -11,7 +11,7 @@ public interface SongService
 {
     List<Song> listSongs();
 
-    Artist addArtistToSong(Artist artist, Song song);
+    Artist addArtistToSong(Long artistId, String trackId);
 
     Optional<Song> findByTrackId(String trackId);
 

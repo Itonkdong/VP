@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "MyServlet4", urlPatterns = "/myservlet4")
-public class MyServlet4 extends HttpServlet
+@WebServlet(name = "MyServlet4", urlPatterns = "/servlet/session-reset")
+public class ServletSessionReset extends HttpServlet
 {
 
     @Override

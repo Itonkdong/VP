@@ -2,15 +2,15 @@ package mk.ukim.finki.mk.lab.service.impl;
 
 import mk.ukim.finki.mk.lab.model.Artist;
 import mk.ukim.finki.mk.lab.model.Song;
-import mk.ukim.finki.mk.lab.repository.InMemoryArtistRepository;
+import mk.ukim.finki.mk.lab.model.exception.ArtistNotFoundException;
+import mk.ukim.finki.mk.lab.repository.jpa.ArtistRepository;
+import mk.ukim.finki.mk.lab.repository.jpa.SongRepository;
 import mk.ukim.finki.mk.lab.service.ArtistService;
-import mk.ukim.finki.mk.lab.service.SongService;
 import mk.ukim.finki.mk.lab.service.helper.CustomHandler;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.MissingResourceException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -18,49 +18,43 @@ import java.util.stream.Collectors;
 public class ArtistServiceImpl implements ArtistService
 {
 
-    private final InMemoryArtistRepository repository;
-    private final SongService songService;
+    private final ArtistRepository artistRepository;
+    private final SongRepository songRepository;
 
-    public ArtistServiceImpl(InMemoryArtistRepository repository, SongService songService)
+    public ArtistServiceImpl(ArtistRepository artistRepository, SongRepository songRepository)
     {
-        this.repository = repository;
-        this.songService = songService;
+        this.artistRepository = artistRepository;
+        this.songRepository = songRepository;
     }
 
     @Override
     public List<Artist> listAll()
     {
-        return this.repository
+        return this.artistRepository
                 .findAll();
     }
 
     @Override
     public Optional<Artist> findById(long id)
     {
-        return this.repository
+        return this.artistRepository
                 .findById(id);
     }
 
     @Override
     public List<Song> findArtistSongs(long artistId)
     {
-        Optional<Artist> artist = this.findById(artistId);
+        Artist artist = this.findById(artistId)
+                .orElseThrow(() -> new ArtistNotFoundException(artistId));
         List<Song> artistsSongs = new ArrayList<>();
 
-        if (artist.isEmpty())
-        {
-//            resp.sendRedirect("/allArtists");
-            throw new MissingResourceException("Artist not found", "Artist", String.valueOf(artistId));
-//            return;
-        }
-
-        List<Song> songs = songService.listSongs();
+        List<Song> songs = songRepository.findAll();
 
         for (Song song : songs)
         {
             Optional<Artist> foundArtist = song.getPerformers().
                     stream()
-                    .filter(p -> p.getId() == artistId)
+                    .filter(p -> p.getId().equals(artist.getId()))
                     .findFirst();
 
             if (foundArtist.isPresent())
@@ -73,12 +67,14 @@ public class ArtistServiceImpl implements ArtistService
     }
 
     @Override
-    public List<Artist> findArtistsByName(String artistName) {
+    public List<Artist> findArtistsByName(String artistName)
+    {
         if (CustomHandler.isNullOrEmpty(artistName))
         {
             return this.listAll();
         }
 
-        return this.listAll().stream().filter(artist -> artist.getFirstName().contains(artistName)).collect(Collectors.toList());
+        return this.artistRepository
+                .findByFirstNameLikeOrLastNameLike(artistName, artistName);
     }
 }

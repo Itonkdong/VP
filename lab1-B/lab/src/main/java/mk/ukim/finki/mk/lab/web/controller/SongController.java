@@ -1,22 +1,19 @@
 package mk.ukim.finki.mk.lab.web.controller;
 
 import mk.ukim.finki.mk.lab.model.Album;
-import mk.ukim.finki.mk.lab.model.Artist;
 import mk.ukim.finki.mk.lab.model.Song;
+import mk.ukim.finki.mk.lab.model.exception.ArtistNotFoundException;
+import mk.ukim.finki.mk.lab.model.exception.SongNotFoundException;
 import mk.ukim.finki.mk.lab.service.AlbumService;
 import mk.ukim.finki.mk.lab.service.ArtistService;
 import mk.ukim.finki.mk.lab.service.SongService;
 import mk.ukim.finki.mk.lab.service.helper.CustomHandler;
 import mk.ukim.finki.mk.lab.service.helper.Result;
-import mk.ukim.finki.mk.lab.service.helper.WebContextBuilder;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.context.WebContext;
 
 import java.net.URLEncoder;
-import java.net.http.HttpClient;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
@@ -27,13 +24,11 @@ public class SongController
 {
     private final SongService songService;
     private final AlbumService albumService;
-    private final ArtistService artistService;
 
-    public SongController(SongService songService, AlbumService albumService, ArtistService artistService)
+    public SongController(SongService songService, AlbumService albumService)
     {
         this.songService = songService;
         this.albumService = albumService;
-        this.artistService = artistService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -64,11 +59,11 @@ public class SongController
         Optional<Song> songOptional = this.songService.findSongById(id);
         if (songOptional.isEmpty())
         {
-            String errorMessage = URLEncoder.encode(String.format("Song with id: %d does not exist", id), StandardCharsets.UTF_8);
-            return String.format("redirect:/songs?error=%s", errorMessage);
+            return CustomHandler.sendRedirect("/songs", String.format("Song with id: %d does not exist", id));
+//            String errorMessage = URLEncoder.encode(String.format("Song with id: %d does not exist", id), StandardCharsets.UTF_8);
+//            return String.format("redirect:/songs?error=%s", errorMessage);
         }
         Song song = songOptional.get();
-
         model.addAttribute("editSong", song);
         model.addAttribute("allAlbums", allAlbums);
 
@@ -145,22 +140,18 @@ public class SongController
             return String.format("redirect:/artists?trackId=%s", trackId);
         }
 
-
-        Optional<Artist> artist = artistService.findById(artistId);
-
-        if (artist.isEmpty())
+        try
+        {
+            songService.addArtistToSong(artistId, trackId);
+        }
+        catch (ArtistNotFoundException e)
         {
             return "redirect:/artists";
         }
-
-        Optional<Song> song = songService.findByTrackId(trackId);
-
-        if (song.isEmpty())
+        catch (SongNotFoundException e)
         {
             return "redirect:/songs";
         }
-
-        songService.addArtistToSong(artist.get(), song.get());
 
         return String.format("redirect:/songs/song-details?trackId=%s", trackId);
     }

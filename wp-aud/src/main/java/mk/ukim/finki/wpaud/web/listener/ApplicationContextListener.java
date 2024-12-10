@@ -13,11 +13,14 @@ public class ApplicationContextListener implements ServletContextListener
     {
         ServletContext context = sce.getServletContext();
         context.setAttribute("categoriesPageVisits", 0);
+//        context.setInitParameter("paramparam", 123);
+        System.out.println("App Context Created");
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce)
     {
+        System.out.println("App Context Destroyed");
 
     }
 }

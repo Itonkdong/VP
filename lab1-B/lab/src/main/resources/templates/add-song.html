@@ -61,7 +61,7 @@
             <option th:each="album : ${allAlbums}"
                     th:value="${album.getId()}"
                     th:text="${album.getName()} + ', ' + ${album.getReleaseYear()}"
-                    th:selected="${album.getId()} == ${editSong.getAlbumId()}"
+                    th:selected="${album.getId()} == ${editSong.getAlbum().getId()}"
             >
             </option>
         </select>
