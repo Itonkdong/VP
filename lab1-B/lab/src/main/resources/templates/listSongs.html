@@ -14,11 +14,19 @@
 <header>
     <h1>Welcome to My Music Store</h1>
 </header>
+<section>
+    <div th:if="${userDetails} == null">
+        <a href="/auth/login">Login</a>
+        <a href="/auth/register">Register</a>
+    </div>
+    <div th:if="${userDetails} != null">
+        <div>Active User: <th:block th:text="${userDetails}"></th:block> </div>
+        <a href="/auth/logout">Logout</a>
+    </div>
+</section>
 <main>
-    <h2>Choose a song:</h2>
-    <!-- Display radio buttons for each song,
-            the value should be the trackId
-            and the displayed text should be Title: <songTitle>, Genre:<genre>, Release Year: <releaseYear> -->
+    <h2>Choose a song to add artis to:</h2>
+
     <form action="/artists" method="get">
         <div th:each="song : ${allSongs}">
             <input type="radio"
@@ -27,14 +35,27 @@
                    th:value="${song.getTrackId()}"
                    th:text="'Title: ' + ${song.getTitle()} + ', Genre: ' + ${song.getGenre()}  + ', Release Year: ' + ${song.getReleaseYear()} + ', Album: ' + ${song.getAlbum().getName()}"
             >
-            <a th:href="@{'/songs/edit-form/{id}' (id=${song.getId()})}">Edit</a>
-            <a th:href="@{'/songs/delete/{songId}' (songId=${song.getId()})}">Delete</a>
+
+            <a th:href="@{'/songs/edit-form/{id}' (id=${song.getId()})}"
+               sec:authorize="isAuthenticated()"
+            >Edit</a>
+
+            <a th:href="@{'/songs/delete/{songId}' (songId=${song.getId()})}"
+               sec:authorize="isAuthenticated()"
+            >Delete</a>
+
+            <a th:href="'/songs/song-details?trackId=' + ${song.getTrackId()}"
+            >Details</a>
 
         </div>
         <input type='submit' value='Submit'>
 
     </form>
-    <a href="/songs/add-form">Add new Song</a>
+    <a href="/songs/add-form"
+       sec:authorize="hasRole('ROLE_ADMIN')"
+    >Add new Song</a>
+    <br>
+    <a href="/albums">All Albums</a>
 
     <div th:if="${error != null}" th:text="'Error Orrcured: ' + ${error}">
 

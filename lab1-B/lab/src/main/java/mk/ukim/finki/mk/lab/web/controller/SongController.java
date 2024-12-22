@@ -1,5 +1,6 @@
 package mk.ukim.finki.mk.lab.web.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import mk.ukim.finki.mk.lab.model.Album;
 import mk.ukim.finki.mk.lab.model.Song;
 import mk.ukim.finki.mk.lab.model.exception.ArtistNotFoundException;
@@ -9,6 +10,7 @@ import mk.ukim.finki.mk.lab.service.ArtistService;
 import mk.ukim.finki.mk.lab.service.SongService;
 import mk.ukim.finki.mk.lab.service.helper.CustomHandler;
 import mk.ukim.finki.mk.lab.service.helper.Result;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,15 +34,23 @@ public class SongController
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getSongsPage(@RequestParam(required = false) String error, Model model)
+    public String getSongsPage(@RequestParam(required = false) String error, Model model,
+                               HttpServletRequest request
+                               )
     {
         model.addAttribute("error", error);
         List<Song> allSongs = songService.listSongs();
         model.addAttribute("allSongs", allSongs);
 
+        model.addAttribute("userDetails", request.getRemoteUser());
+
+//        In thymleaf
+//        ${#request.getRemoteUser()} != null
+
         return "listSongs";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET,path = "/add-form")
     public String getAddSongPage(Model model)
     {

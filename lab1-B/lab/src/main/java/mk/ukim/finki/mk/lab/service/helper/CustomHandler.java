@@ -5,6 +5,7 @@ import org.thymeleaf.context.WebContext;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -57,5 +58,11 @@ public class CustomHandler
         {
             return String.format("redirect:%s",path);
         }
+    }
+
+    public static boolean anyNullOrEmpty(String ... params)
+    {
+        return Arrays.stream(params)
+                .anyMatch(CustomHandler::isNullOrEmpty);
     }
 }
