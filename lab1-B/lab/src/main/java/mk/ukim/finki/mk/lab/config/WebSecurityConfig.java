@@ -45,7 +45,9 @@ public class WebSecurityConfig
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/songs", "/songs/song-details/**", "/albums", "/filteredSongs", "/auth/register").permitAll()
-//                        .requestMatchers("/songs/add-form").hasRole("ADMIN")
+                        .requestMatchers("/songs/add-form").hasRole("ADMIN")
+                        .requestMatchers("/songs/delete/**").hasRole( "ADMIN")
+                        .requestMatchers("/songs/edit-form/**").hasAnyRole("MODERATOR", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -85,7 +87,13 @@ public class WebSecurityConfig
                 .roles("USER")
                 .build();
 
-        return new InMemoryUserDetailsManager(admin, user);
+        UserDetails moderator = User.builder()
+                .username("moderator1")
+                .password(passwordEncoder.encode("moderator1"))
+                .roles("MODERATOR")
+                .build();
+
+        return new InMemoryUserDetailsManager(admin, user, moderator);
     }
 
 //    @Bean

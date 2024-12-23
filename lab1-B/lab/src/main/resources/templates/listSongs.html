@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>Songs Homepage - Welcome to My Music Store</title>
@@ -37,11 +37,11 @@
             >
 
             <a th:href="@{'/songs/edit-form/{id}' (id=${song.getId()})}"
-               sec:authorize="isAuthenticated()"
+               sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')"
             >Edit</a>
 
             <a th:href="@{'/songs/delete/{songId}' (songId=${song.getId()})}"
-               sec:authorize="isAuthenticated()"
+               sec:authorize="hasRole('ROLE_ADMIN')"
             >Delete</a>
 
             <a th:href="'/songs/song-details?trackId=' + ${song.getTrackId()}"
