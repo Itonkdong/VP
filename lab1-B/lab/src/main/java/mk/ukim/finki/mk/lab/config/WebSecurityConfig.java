@@ -2,6 +2,8 @@ package mk.ukim.finki.mk.lab.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,6 +22,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WebSecurityConfig
 {
     private final PasswordEncoder passwordEncoder;
+    /*private final CustomUsernamePasswordAuthenticationProvider authProvider;
+
+    public WebSecurityConfig(PasswordEncoder passwordEncoder, CustomUsernamePasswordAuthenticationProvider authProvider)
+    {
+        this.passwordEncoder = passwordEncoder;
+        this.authProvider = authProvider;
+    }*/
 
     public WebSecurityConfig(PasswordEncoder passwordEncoder)
     {
@@ -61,22 +70,32 @@ public class WebSecurityConfig
         return http.build();
     }
 
-@Bean
+    @Bean
     public UserDetailsService userDetailsService()
     {
         UserDetails admin = User.builder()
-                .username("admin")
-                .password(passwordEncoder.encode("admin"))
+                .username("admin1")
+                .password(passwordEncoder.encode("admin1"))
                 .roles("ADMIN")
                 .build();
 
         UserDetails user = User.builder()
-                .username("user")
-                .password(passwordEncoder.encode("user"))
+                .username("user1")
+                .password(passwordEncoder.encode("user1"))
                 .roles("USER")
                 .build();
 
         return new InMemoryUserDetailsManager(admin, user);
     }
 
+//    @Bean
+//    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception
+//    {
+//        AuthenticationManagerBuilder authenticationManagerBuilder =
+//                http.getSharedObject(AuthenticationManagerBuilder.class);
+//
+//        authenticationManagerBuilder.authenticationProvider(authProvider);
+//
+//        return authenticationManagerBuilder.build();
+//    }
 }

@@ -16,7 +16,7 @@ import java.util.Collections;
 @Setter
 @Getter
 public class User
-//        implements UserDetails
+        implements UserDetails
 {
     @Id
     private String username;
@@ -24,14 +24,14 @@ public class User
     private String name;
     private String surname;
 
-//    @Enumerated(value = EnumType.STRING)
-//    private Role role;
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
     //Defaults
-   /* private boolean isAccountNonExpired = true;
+    private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;
     private boolean isCredentialsNonExpired = true;
-    private boolean isEnabled = true;*/
+    private boolean isEnabled = true;
 
     public User(String username, String password, String name, String surname, Role role)
     {
@@ -39,11 +39,11 @@ public class User
         this.password = password;
         this.name = name;
         this.surname = surname;
-//        this.role = role;
+        this.role = role;
     }
 
 
-   /* //Returns the list of user roles
+    //Returns the list of user roles
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
@@ -72,5 +72,5 @@ public class User
     public boolean isEnabled()
     {
         return this.isEnabled;
-    }*/
+    }
 }
