@@ -27,14 +27,14 @@ public class MYServlet extends HttpServlet
 
     public MYServlet()
     {
-        System.out.println("My Servlet 1 const");
+//        System.out.println("My Servlet 1 const");
 
     }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
-        System.out.println("My Servlet 1 init");
+//        System.out.println("My Servlet 1 init");
         super.init();
     }
 
@@ -71,7 +71,7 @@ public class MYServlet extends HttpServlet
     @Override
     public void destroy()
     {
-        System.out.println("Destroying My Servlet 1 ");
+//        System.out.println("Destroying My Servlet 1 ");
 
     }
 }

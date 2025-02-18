@@ -57,7 +57,7 @@ public class HomeController implements
     {
         this.complexInterface = complexInterface;
         this.a = a;
-        System.out.println("Home Controller (Bean) instantiated");
+//        System.out.println("Home Controller (Bean) instantiated");
     }
 
 
@@ -65,7 +65,7 @@ public class HomeController implements
     public void setBeanName(String name)
     {
         this.beanName = name;
-        System.out.println("Home Controller (Bean): NAME AWARE");
+//        System.out.println("Home Controller (Bean): NAME AWARE");
 
     }
 
@@ -73,7 +73,7 @@ public class HomeController implements
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException
     {
         this.beanFactory = beanFactory;
-        System.out.println("Home Controller (Bean): BEAN FACTORY AWARE");
+//        System.out.println("Home Controller (Bean): BEAN FACTORY AWARE");
 
     }
 
@@ -81,7 +81,7 @@ public class HomeController implements
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException
     {
         this.applicationContext = applicationContext;
-        System.out.println("Home Controller (Bean): APPLICATION CONTEXT AWARE");
+//        System.out.println("Home Controller (Bean): APPLICATION CONTEXT AWARE");
 
     }
 
@@ -96,14 +96,14 @@ public class HomeController implements
     @Override
     public void afterPropertiesSet() throws Exception
     {
-        System.out.println("After properties set");
+//        System.out.println("After properties set");
     }
 
 
     @PostConstruct
     public void init()
     {
-        System.out.println("INIT METHOD CALLED FROM HOME CONTROLLER");
+//        System.out.println("INIT METHOD CALLED FROM HOME CONTROLLER");
     }
 
     @Override
@@ -134,20 +134,20 @@ public class HomeController implements
     @RequestMapping(method = RequestMethod.GET, path = "/test")
     public String test(@RequestParam(required = true, value = "param1") String param, HttpServletRequest request)
     {
-        System.out.println(request.getHeader("User-agent"));
+//        System.out.println(request.getHeader("User-agent"));
         return "index";
     }
 
     @PreDestroy
     public void lastCalledMethod()
     {
-        System.out.println("GOODBYE GOOD WORLD");
+//        System.out.println("GOODBYE GOOD WORLD");
     }
 
     @Override
     public void destroy() throws Exception
     {
-        System.out.println("Destroying Home Controller (Bean)");
+//        System.out.println("Destroying Home Controller (Bean)");
     }
 
 

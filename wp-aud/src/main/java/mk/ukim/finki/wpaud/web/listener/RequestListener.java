@@ -6,6 +6,7 @@ import jakarta.servlet.ServletRequestEvent;
 import jakarta.servlet.ServletRequestListener;
 import jakarta.servlet.annotation.WebListener;
 import jakarta.servlet.http.HttpServletRequest;
+import mk.ukim.finki.wpaud.model.User;
 
 @WebListener
 public class RequestListener implements ServletRequestListener
@@ -26,20 +27,22 @@ public class RequestListener implements ServletRequestListener
         Object reqAtr = servletRequest.getAttribute("ReqAtr");
         if (reqAtr == null)
         {
-            System.out.println("Created an request, with not attr");
+//            System.out.println("Created an request, with not attr");
 
         }
         else
         {
-            System.out.printf("Created an request, with attr: %s\n", reqAtr.toString());
+//            System.out.printf("Created an request, with attr: %s\n", reqAtr.toString());
 
         }
+
+        sre.getServletRequest().setAttribute("requestUser", new User("request", "request"));
 
     }
 
     @Override
     public void requestDestroyed(ServletRequestEvent sre)
     {
-        System.out.println("Request Destroyed");
+//        System.out.println("Request Destroyed");
     }
 }

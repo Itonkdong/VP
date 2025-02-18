@@ -16,13 +16,13 @@ public class SessionListener implements HttpSessionListener
     public void sessionCreated(HttpSessionEvent se)
     {
         HttpSession session = se.getSession();
-        System.out.printf("CREATED NEW SESSION WITH ID %S\n", session.getId());
+//        System.out.printf("CREATED NEW SESSION WITH ID %S\n", session.getId());
     }
 
     @Override
     public void sessionDestroyed(HttpSessionEvent se)
     {
         HttpSession session = se.getSession();
-        System.out.printf("DESTROYED SESSION WITH ID %S\n", session.getId());
+//        System.out.printf("DESTROYED SESSION WITH ID %S\n", session.getId());
     }
 }

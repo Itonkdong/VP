@@ -16,25 +16,25 @@ public class ServletFilter extends HttpServlet
 
     public ServletFilter()
     {
-        System.out.println("My Servlet 3 ");
+//        System.out.println("My Servlet 3 ");
     }
 
     @Override
     public void init(ServletConfig config) throws ServletException
     {
-        System.out.println("My Servlet 3 init");
+//        System.out.println("My Servlet 3 init");
         super.init(config);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
-        System.out.println("In Servlet Filter 1");
+//        System.out.println("In Servlet Filter 1");
     }
 
     @Override
     public void destroy()
     {
-        System.out.println("Destroying My Servlet 3 ");
+//        System.out.println("Destroying My Servlet 3 ");
     }
 }

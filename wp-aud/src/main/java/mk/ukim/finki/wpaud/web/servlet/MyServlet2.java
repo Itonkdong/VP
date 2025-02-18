@@ -19,13 +19,13 @@ public class MyServlet2 extends HttpServlet
 {
     public MyServlet2()
     {
-        System.out.println("My Servlet 2 const");
+//        System.out.println("My Servlet 2 const");
     }
 
     @Override
     public void init() throws ServletException
     {
-        System.out.println("My Servlet 2 init");
+//        System.out.println("My Servlet 2 init");
         super.init();
 
     }
@@ -63,7 +63,7 @@ public class MyServlet2 extends HttpServlet
         // So .include izborniot servlet mozhe da prodolzhi so ureduvanje na odogovort. Destinaciskiot mozhe da go menuva samo
         //teloto no ne i headerite
         writer.println("This is not shown");
-        System.out.println("This is printed");
+//        System.out.println("This is printed");
 //        servletContext.removeAttribute("Visits");
 
     }
@@ -71,7 +71,7 @@ public class MyServlet2 extends HttpServlet
     @Override
     public void destroy()
     {
-        System.out.println("Destroying My Servlet 2 ");
+//        System.out.println("Destroying My Servlet 2 ");
 
     }
 }

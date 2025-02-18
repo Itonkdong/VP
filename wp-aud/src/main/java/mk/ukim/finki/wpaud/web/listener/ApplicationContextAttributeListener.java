@@ -11,20 +11,20 @@ public class ApplicationContextAttributeListener implements ServletContextAttrib
     public void attributeAdded(ServletContextAttributeEvent scae)
     {
 
-        System.out.printf("Added application attribute %s with value %s\n", scae.getName(), scae.getValue());
+//        System.out.printf("Added application attribute %s with value %s\n", scae.getName(), scae.getValue());
     }
 
     @Override
     public void attributeRemoved(ServletContextAttributeEvent scae)
     {
-        System.out.printf("Removed application attribute %s with value %s\n", scae.getName(), scae.getValue());
+//        System.out.printf("Removed application attribute %s with value %s\n", scae.getName(), scae.getValue());
 
     }
 
     @Override
     public void attributeReplaced(ServletContextAttributeEvent scae)
     {
-        System.out.printf("Updated application attribute %s with value %s\n", scae.getName(), scae.getValue());
+//        System.out.printf("Updated application attribute %s with value %s\n", scae.getName(), scae.getValue());
 
     }
 }
