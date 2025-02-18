@@ -11,12 +11,12 @@ This repository contains my solved laboratory exercises and previous published m
   - [How to Use](#how-to-use)
   - [Disclaimer](#disclaimer)
   - [License](#license)
-  - [Contributor](#contributor)
+  - [Contributors](#contributors)
 
 ## Course Overview
 
 - **Course Name:** VP (Web Programming)
-- **Teachers and Assistants(s):** Jovan, Ana, Elena
+- **Assistant(s):** Jovan, Ana, Elena
 - **Semester:** Winter, 2024
 - **Description:**  
    This course focuses on **back-end web development** using **Spring Framework**. Topics covered include **Authentication and authorization, database integration, and server-side rendering**. The laboratory exercises are designed to reinforce practical skills in building scalable and maintainable web applications. The midterm exams focus on applying theoretical and practical knowledge to solve back-end development challenges.
@@ -51,7 +51,7 @@ This repository contains my academic solutions for educational purposes. All cod
 
 You are welcome to use and modify the code for educational purposes, but please attribute the work properly. Do not use it for any commercial purposes without permission.
 
-## Contributor
+## Contributors
 
 **Viktor Kostadinoski**  
 Contributor and maintainer of this repository.
